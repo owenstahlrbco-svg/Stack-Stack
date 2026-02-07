@@ -6,7 +6,236 @@
   <title>YardCraft - Landscape Design Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <style>
+/* ============================================================
+   YardCraft - Landscape Design Studio
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green-50: #E8F5E9; --green-100: #C8E6C9; --green-200: #A5D6A7;
+  --green-400: #66BB6A; --green-500: #43b87a; --green-600: #2E7D32; --green-700: #1B5E20;
+  --pink-400: #F06292; --pink-500: #E74C8B;
+  --orange-400: #FFA726; --orange-500: #F5A623;
+  --purple-400: #AB47BC; --blue-400: #42A5F5; --yellow-400: #FDD835;
+  --brown-300: #A1887F; --brown-500: #8D6E63;
+  --gray-50: #FAFAFA; --gray-100: #F5F5F5; --gray-200: #EEEEEE; --gray-300: #E0E0E0;
+  --gray-400: #BDBDBD; --gray-500: #9E9E9E; --gray-600: #757575;
+  --gray-700: #616161; --gray-800: #424242; --gray-900: #212121;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 18px; --radius-xl: 24px;
+  --shadow-sm: 0 2px 6px rgba(0,0,0,0.08); --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.16); --shadow-fun: 0 6px 24px rgba(67,184,122,0.25);
+  --font-display: 'Fredoka', sans-serif; --font-body: 'Nunito', sans-serif;
+  --topbar-h: 56px;
+}
+
+html, body { height: 100%; font-family: var(--font-body); color: var(--gray-800); background: #f0f4f0; overflow: hidden; }
+.hidden { display: none !important; }
+
+/* Splash */
+.splash { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 30%, #fff8e1 60%, #fce4ec 100%); overflow: hidden; z-index: 100; }
+.splash-content { position: relative; z-index: 2; text-align: center; max-width: 560px; padding: 40px 30px; }
+.logo-area { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 8px; }
+.logo-icon { filter: drop-shadow(0 3px 8px rgba(67,184,122,0.35)); animation: logoBounce 2s ease-in-out infinite; }
+@keyframes logoBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.logo-text { font-family: var(--font-display); font-size: 48px; font-weight: 700;
+  background: linear-gradient(135deg, var(--green-500), var(--green-700));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.tagline { font-family: var(--font-display); font-size: 22px; font-weight: 500; color: var(--gray-700); margin-bottom: 8px; }
+.sub-tagline { font-size: 15px; color: var(--gray-500); line-height: 1.5; margin-bottom: 32px; }
+
+.upload-zone { border: 3px dashed var(--green-400); border-radius: var(--radius-xl); padding: 40px 30px;
+  cursor: pointer; transition: all 0.3s ease; background: rgba(255,255,255,0.7); backdrop-filter: blur(5px); }
+.upload-zone:hover, .upload-zone.drag-over { border-color: var(--green-500); background: rgba(232,245,233,0.8);
+  transform: scale(1.02); box-shadow: var(--shadow-fun); }
+.upload-icon { margin-bottom: 12px; animation: uploadPulse 3s ease-in-out infinite; }
+@keyframes uploadPulse { 0%, 100% { transform: scale(1); opacity: 0.85; } 50% { transform: scale(1.08); opacity: 1; } }
+.upload-text { font-family: var(--font-display); font-size: 17px; font-weight: 500; color: var(--green-600); margin-bottom: 6px; }
+.upload-hint { font-size: 13px; color: var(--gray-400); }
+
+.btn-demo { margin-top: 20px; background: none; border: 2px solid var(--green-400); color: var(--green-600);
+  font-family: var(--font-display); font-size: 15px; font-weight: 500; padding: 10px 24px;
+  border-radius: 50px; cursor: pointer; transition: all 0.25s ease; }
+.btn-demo:hover { background: var(--green-500); color: white; border-color: var(--green-500);
+  transform: translateY(-2px); box-shadow: var(--shadow-fun); }
+
+.splash-bg-shapes { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+.shape { position: absolute; border-radius: 50%; opacity: 0.12; animation: shapeFloat 8s ease-in-out infinite; }
+.shape-1 { width: 300px; height: 300px; background: var(--green-400); top: -80px; left: -80px; animation-delay: 0s; }
+.shape-2 { width: 200px; height: 200px; background: var(--pink-400); top: 20%; right: -60px; animation-delay: 2s; }
+.shape-3 { width: 250px; height: 250px; background: var(--orange-400); bottom: -60px; left: 30%; animation-delay: 4s; }
+.shape-4 { width: 180px; height: 180px; background: var(--purple-400); bottom: 15%; right: 10%; animation-delay: 6s; }
+@keyframes shapeFloat { 0%, 100% { transform: translate(0, 0) scale(1); } 25% { transform: translate(15px, -20px) scale(1.05); }
+  50% { transform: translate(-10px, 15px) scale(0.98); } 75% { transform: translate(20px, 10px) scale(1.03); } }
+
+/* Editor */
+.editor { display: flex; flex-direction: column; height: 100vh; }
+
+/* Topbar */
+.topbar { display: flex; align-items: center; justify-content: space-between; height: var(--topbar-h);
+  padding: 0 16px; background: white; border-bottom: 1px solid var(--gray-200); box-shadow: var(--shadow-sm); z-index: 20; flex-shrink: 0; }
+.topbar-left { display: flex; align-items: center; gap: 10px; }
+.topbar-title { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--green-600); }
+.topbar-center { display: flex; align-items: center; gap: 4px; background: var(--gray-100); padding: 4px 8px; border-radius: var(--radius-md); }
+.tool-btn { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: none;
+  background: transparent; color: var(--gray-600); border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s ease; position: relative; }
+.tool-btn:hover { background: var(--gray-200); color: var(--gray-800); }
+.tool-btn.active { background: var(--green-500); color: white; box-shadow: 0 2px 8px rgba(67,184,122,0.4); }
+.tool-divider { width: 1px; height: 24px; background: var(--gray-300); margin: 0 6px; }
+.topbar-right { display: flex; align-items: center; gap: 10px; }
+.btn-estimate { display: flex; align-items: center; gap: 6px; padding: 8px 18px; border: none;
+  background: linear-gradient(135deg, var(--orange-500), #FF7043); color: white;
+  font-family: var(--font-display); font-size: 14px; font-weight: 500; border-radius: 50px;
+  cursor: pointer; transition: all 0.25s ease; box-shadow: 0 3px 12px rgba(245,166,35,0.35); }
+.btn-estimate:hover { transform: translateY(-2px); box-shadow: 0 5px 18px rgba(245,166,35,0.5); }
+.btn-new-photo { padding: 8px 16px; border: 2px solid var(--gray-300); background: white; color: var(--gray-600);
+  font-family: var(--font-display); font-size: 13px; font-weight: 500; border-radius: 50px; cursor: pointer; transition: all 0.2s ease; }
+.btn-new-photo:hover { border-color: var(--green-400); color: var(--green-600); }
+
+.editor-body { display: flex; flex: 1; overflow: hidden; }
+
+/* Sidebar */
+.sidebar { width: 280px; background: white; border-right: 1px solid var(--gray-200);
+  display: flex; flex-direction: column; flex-shrink: 0; z-index: 10; }
+.sidebar-search { padding: 12px 14px 8px; }
+.search-input { width: 100%; padding: 9px 14px; border: 2px solid var(--gray-200); border-radius: 50px;
+  font-family: var(--font-body); font-size: 13px; outline: none; transition: border-color 0.2s ease; background: var(--gray-50); }
+.search-input:focus { border-color: var(--green-400); background: white; }
+.search-input::placeholder { color: var(--gray-400); }
+.category-tabs { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 12px; border-bottom: 1px solid var(--gray-200); }
+.cat-tab { display: flex; align-items: center; gap: 4px; padding: 6px 10px; border: none; background: var(--gray-100);
+  color: var(--gray-600); font-family: var(--font-display); font-size: 12px; font-weight: 500;
+  border-radius: 50px; cursor: pointer; transition: all 0.2s ease; white-space: nowrap; }
+.cat-tab:hover { background: var(--green-50); color: var(--green-600); }
+.cat-tab.active { background: var(--green-500); color: white; box-shadow: 0 2px 8px rgba(67,184,122,0.35); }
+.cat-tab svg { flex-shrink: 0; }
+
+.items-grid { flex: 1; overflow-y: auto; padding: 12px; display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; align-content: start; }
+.items-grid::-webkit-scrollbar { width: 6px; }
+.items-grid::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 10px; }
+.item-card { background: white; border: 2px solid var(--gray-200); border-radius: var(--radius-md); padding: 10px;
+  cursor: grab; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.item-card:hover { border-color: var(--green-400); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.item-card:active { cursor: grabbing; transform: scale(0.97); }
+.item-preview { width: 100%; height: 70px; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--gray-50), var(--green-50)); border-radius: var(--radius-sm); }
+.item-preview svg { max-width: 80%; max-height: 60px; }
+.item-info { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%; }
+.item-name { font-family: var(--font-display); font-size: 12px; font-weight: 500; color: var(--gray-700); text-align: center; line-height: 1.2; }
+.item-price { font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--green-500); }
+
+.item-card:nth-child(3n) .item-preview { background: linear-gradient(135deg, var(--gray-50), #FFF8E1); }
+.item-card:nth-child(3n+1) .item-preview { background: linear-gradient(135deg, var(--gray-50), #F3E5F5); }
+.item-card:nth-child(3n+2) .item-preview { background: linear-gradient(135deg, var(--gray-50), #E3F2FD); }
+
+/* Canvas */
+.canvas-area { flex: 1; display: flex; flex-direction: column; overflow: hidden;
+  background: radial-gradient(circle at 20% 50%, rgba(67,184,122,0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(245,166,35,0.05) 0%, transparent 50%),
+    linear-gradient(180deg, #f4f6f4 0%, #edf0ed 100%); }
+.canvas-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; overflow: auto;
+  padding: 24px; position: relative; transform-origin: center center; transition: transform 0.2s ease; }
+.canvas-wrapper.drop-hover { background: rgba(67,184,122,0.06); }
+#mainCanvas { border-radius: var(--radius-md); box-shadow: var(--shadow-lg); display: block; }
+.placed-items-layer { position: absolute; top: 0; left: 0; border-radius: var(--radius-md); overflow: visible; }
+#mainCanvas, .placed-items-layer { position: absolute; }
+
+.placed-item { position: absolute; cursor: move; transition: box-shadow 0.2s ease, outline 0.2s ease; border-radius: 4px; z-index: 1; }
+.placed-item svg { width: 100%; height: 100%; display: block; pointer-events: none; }
+.placed-item:hover { z-index: 5; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); }
+.placed-item.selected { z-index: 10; outline: 3px solid var(--green-500); outline-offset: 3px;
+  filter: drop-shadow(0 4px 12px rgba(67,184,122,0.4)); animation: selectPulse 1.5s ease-in-out infinite; }
+@keyframes selectPulse { 0%, 100% { outline-color: var(--green-500); } 50% { outline-color: var(--green-400); } }
+
+.tool-select .placed-item { cursor: move; }
+.tool-resize .placed-item { cursor: nwse-resize; }
+.tool-delete .placed-item { cursor: pointer; }
+.tool-delete .placed-item:hover { outline: 3px solid #E53935; outline-offset: 2px; filter: drop-shadow(0 4px 12px rgba(229,57,53,0.4)); }
+
+.item-enter { animation: itemBounceIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes itemBounceIn { 0% { transform: scale(0.3); opacity: 0; } 60% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); } }
+.item-exit { animation: itemFadeOut 0.3s ease forwards; pointer-events: none; }
+@keyframes itemFadeOut { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(0.5); opacity: 0; } }
+
+.canvas-footer { display: flex; align-items: center; justify-content: space-between; padding: 8px 20px;
+  background: white; border-top: 1px solid var(--gray-200); flex-shrink: 0; }
+.zoom-controls { display: flex; align-items: center; gap: 8px; }
+.zoom-btn { width: 32px; height: 32px; border: 1px solid var(--gray-300); background: white; color: var(--gray-600);
+  font-family: var(--font-display); font-size: 15px; font-weight: 600; border-radius: var(--radius-sm);
+  cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; }
+.zoom-btn:hover { border-color: var(--green-400); color: var(--green-600); background: var(--green-50); }
+.zoom-level { font-family: var(--font-display); font-size: 13px; color: var(--gray-600); min-width: 45px; text-align: center; }
+.item-count { font-family: var(--font-display); font-size: 13px; color: var(--gray-500); }
+
+/* Modal */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center; z-index: 1000; animation: modalFadeIn 0.3s ease; }
+@keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal { background: white; border-radius: var(--radius-xl); max-width: 520px; width: 90%; max-height: 85vh;
+  overflow-y: auto; padding: 28px 30px 24px; box-shadow: var(--shadow-lg); position: relative;
+  animation: modalSlideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes modalSlideUp { from { opacity: 0; transform: translateY(30px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.modal-close { position: absolute; top: 14px; right: 18px; width: 32px; height: 32px; border: none;
+  background: var(--gray-100); color: var(--gray-500); font-size: 22px; border-radius: 50%;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; }
+.modal-close:hover { background: var(--gray-200); color: var(--gray-800); }
+.modal-title { display: flex; align-items: center; gap: 10px; font-family: var(--font-display);
+  font-size: 22px; font-weight: 600; color: var(--gray-800); margin-bottom: 20px; }
+.estimate-list { display: flex; flex-direction: column; gap: 2px; margin-bottom: 18px; }
+.estimate-row { display: grid; grid-template-columns: 1fr auto auto auto; gap: 12px; align-items: center;
+  padding: 10px 14px; background: var(--gray-50); border-radius: var(--radius-sm); font-size: 14px; }
+.estimate-row:nth-child(even) { background: white; }
+.est-name { font-family: var(--font-display); font-weight: 500; color: var(--gray-700); }
+.est-qty { color: var(--gray-500); font-size: 13px; }
+.est-unit { color: var(--gray-400); font-size: 13px; }
+.est-line-total { font-family: var(--font-display); font-weight: 600; color: var(--green-600); text-align: right; }
+.estimate-total-section { border-top: 2px solid var(--green-400); padding-top: 14px; margin-bottom: 16px; }
+.estimate-total-row { display: flex; justify-content: space-between; align-items: center; }
+.estimate-total-label { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--gray-700); }
+.estimate-total-value { font-family: var(--font-display); font-size: 28px; font-weight: 700;
+  background: linear-gradient(135deg, var(--green-500), var(--green-700));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.estimate-disclaimer { display: flex; gap: 10px; align-items: flex-start; padding: 14px 16px;
+  background: linear-gradient(135deg, #FFF8E1, #FFF3E0); border: 1px solid #FFE082;
+  border-radius: var(--radius-md); margin-bottom: 18px; }
+.estimate-disclaimer svg { flex-shrink: 0; margin-top: 2px; }
+.estimate-disclaimer p { font-size: 12px; line-height: 1.55; color: var(--gray-700); }
+.estimate-empty { text-align: center; padding: 30px 20px; color: var(--gray-500); }
+.estimate-empty p:first-child { font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--gray-600); margin-bottom: 6px; }
+.modal-actions { display: flex; gap: 10px; }
+.btn-print, .btn-save-design { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 11px 16px; border: none; border-radius: 50px; font-family: var(--font-display);
+  font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.25s ease; }
+.btn-print { background: var(--gray-100); color: var(--gray-700); border: 2px solid var(--gray-300); }
+.btn-print:hover { background: var(--gray-200); border-color: var(--gray-400); }
+.btn-save-design { background: linear-gradient(135deg, var(--green-500), var(--green-600)); color: white;
+  box-shadow: 0 3px 12px rgba(67,184,122,0.35); }
+.btn-save-design:hover { transform: translateY(-2px); box-shadow: 0 5px 18px rgba(67,184,122,0.5); }
+
+.tool-btn::after { content: attr(title); position: absolute; top: calc(100% + 6px); left: 50%;
+  transform: translateX(-50%); background: var(--gray-800); color: white; font-family: var(--font-body);
+  font-size: 11px; padding: 4px 10px; border-radius: 6px; white-space: nowrap;
+  opacity: 0; pointer-events: none; transition: opacity 0.2s ease; z-index: 30; }
+.tool-btn:hover::after { opacity: 1; }
+
+@media print {
+  .topbar, .sidebar, .canvas-footer, .modal-actions, .modal-close { display: none !important; }
+  .modal-overlay { background: none !important; backdrop-filter: none !important; }
+  .modal { box-shadow: none !important; max-width: 100% !important; width: 100% !important; }
+}
+@media (max-width: 768px) {
+  .sidebar { width: 220px; }
+  .category-tabs { gap: 3px; padding: 6px 8px; }
+  .cat-tab { font-size: 11px; padding: 5px 8px; }
+  .cat-tab svg { width: 16px; height: 16px; }
+  .items-grid { grid-template-columns: 1fr; padding: 8px; gap: 8px; }
+  .topbar-center { display: none; }
+  .logo-text { font-size: 36px; }
+  .tagline { font-size: 18px; }
+}
+  </style>
 </head>
 <body>
   <!-- Splash / Landing -->
@@ -18,15 +247,13 @@
           <path d="M40 15 C30 25, 20 35, 25 50 C28 58, 35 60, 40 55 C45 60, 52 58, 55 50 C60 35, 50 25, 40 15Z" fill="#2d8a5e"/>
           <path d="M40 15 C35 28, 30 40, 33 50 C35 55, 38 56, 40 53" stroke="#fff" stroke-width="1.5" fill="none"/>
           <path d="M40 15 C45 28, 50 40, 47 50 C45 55, 42 56, 40 53" stroke="#fff" stroke-width="1.5" fill="none"/>
-          <circle cx="25" cy="55" r="4" fill="#e74c8b"/>
-          <circle cx="55" cy="55" r="4" fill="#f5a623"/>
-          <circle cx="33" cy="58" r="3" fill="#9b59b6"/>
-          <circle cx="47" cy="58" r="3" fill="#3498db"/>
+          <circle cx="25" cy="55" r="4" fill="#e74c8b"/><circle cx="55" cy="55" r="4" fill="#f5a623"/>
+          <circle cx="33" cy="58" r="3" fill="#9b59b6"/><circle cx="47" cy="58" r="3" fill="#3498db"/>
         </svg>
         <h1 class="logo-text">YardCraft</h1>
       </div>
       <p class="tagline">Design Your Dream Landscape</p>
-      <p class="sub-tagline">Upload a photo of your home, drag & drop beautiful plants and features, and see your vision come to life!</p>
+      <p class="sub-tagline">Upload a photo of your home, drag &amp; drop beautiful plants and features, and see your vision come to life!</p>
       <div class="upload-zone" id="uploadZone">
         <svg viewBox="0 0 64 64" width="64" height="64" class="upload-icon">
           <rect x="8" y="16" width="48" height="36" rx="4" fill="none" stroke="#43b87a" stroke-width="3"/>
@@ -41,23 +268,19 @@
       <button class="btn-demo" id="btnDemo">Or try with a demo house</button>
     </div>
     <div class="splash-bg-shapes">
-      <div class="shape shape-1"></div>
-      <div class="shape shape-2"></div>
-      <div class="shape shape-3"></div>
-      <div class="shape shape-4"></div>
+      <div class="shape shape-1"></div><div class="shape shape-2"></div>
+      <div class="shape shape-3"></div><div class="shape shape-4"></div>
     </div>
   </div>
 
   <!-- Main Editor -->
   <div id="editor" class="editor hidden">
-    <!-- Top Bar -->
     <header class="topbar">
       <div class="topbar-left">
         <svg class="topbar-logo" viewBox="0 0 80 80" width="32" height="32">
           <circle cx="40" cy="40" r="38" fill="#43b87a"/>
           <path d="M40 15 C30 25, 20 35, 25 50 C28 58, 35 60, 40 55 C45 60, 52 58, 55 50 C60 35, 50 25, 40 15Z" fill="#2d8a5e"/>
-          <circle cx="25" cy="55" r="4" fill="#e74c8b"/>
-          <circle cx="55" cy="55" r="4" fill="#f5a623"/>
+          <circle cx="25" cy="55" r="4" fill="#e74c8b"/><circle cx="55" cy="55" r="4" fill="#f5a623"/>
         </svg>
         <span class="topbar-title">YardCraft</span>
       </div>
@@ -65,7 +288,7 @@
         <button class="tool-btn active" data-tool="select" title="Select & Move">
           <svg viewBox="0 0 24 24" width="20" height="20"><path d="M3 3L10 21L12.5 13.5L20 11Z" fill="currentColor"/></svg>
         </button>
-        <button class="tool-btn" data-tool="resize" title="Resize Items">
+        <button class="tool-btn" data-tool="resize" title="Resize (scroll wheel)">
           <svg viewBox="0 0 24 24" width="20" height="20"><path d="M21 15L15 21M21 8L8 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </button>
         <button class="tool-btn" data-tool="delete" title="Delete Mode">
@@ -89,7 +312,6 @@
     </header>
 
     <div class="editor-body">
-      <!-- Sidebar - Categories & Items -->
       <aside class="sidebar" id="sidebar">
         <div class="sidebar-search">
           <input type="text" id="searchInput" placeholder="Search items..." class="search-input">
@@ -100,32 +322,29 @@
             Trees
           </button>
           <button class="cat-tab" data-category="flowers">
-            <svg viewBox="0 0 32 32" width="22" height="22"><circle cx="16" cy="12" r="5" fill="#e74c8b"/><circle cx="10" cy="15" r="4" fill="#f06292"/><circle cx="22" cy="15" r="4" fill="#f06292"/><circle cx="16" cy="12" r="2.5" fill="#f5a623"/><rect x="15" y="17" width="2" height="10" fill="#43b87a"/><ellipse cx="12" cy="24" rx="4" ry="2" fill="#43b87a"/><ellipse cx="20" cy="24" rx="4" ry="2" fill="#43b87a"/></svg>
+            <svg viewBox="0 0 32 32" width="22" height="22"><circle cx="16" cy="12" r="5" fill="#e74c8b"/><circle cx="10" cy="15" r="4" fill="#f06292"/><circle cx="22" cy="15" r="4" fill="#f06292"/><circle cx="16" cy="12" r="2.5" fill="#f5a623"/><rect x="15" y="17" width="2" height="10" fill="#43b87a"/></svg>
             Flowers
           </button>
           <button class="cat-tab" data-category="shrubs">
-            <svg viewBox="0 0 32 32" width="22" height="22"><ellipse cx="16" cy="18" rx="12" ry="9" fill="#43b87a"/><ellipse cx="10" cy="16" rx="7" ry="7" fill="#2d8a5e"/><ellipse cx="22" cy="16" rx="7" ry="7" fill="#2d8a5e"/><rect x="15" y="23" width="2" height="5" fill="#8B6914"/></svg>
+            <svg viewBox="0 0 32 32" width="22" height="22"><ellipse cx="16" cy="18" rx="12" ry="9" fill="#43b87a"/><ellipse cx="10" cy="16" rx="7" ry="7" fill="#2d8a5e"/><ellipse cx="22" cy="16" rx="7" ry="7" fill="#2d8a5e"/></svg>
             Shrubs
           </button>
           <button class="cat-tab" data-category="walls">
-            <svg viewBox="0 0 32 32" width="22" height="22"><rect x="2" y="12" width="28" height="16" rx="1" fill="#b0855e"/><rect x="3" y="13" width="8" height="5" rx="0.5" fill="#c4976e" stroke="#a07050" stroke-width="0.5"/><rect x="12" y="13" width="8" height="5" rx="0.5" fill="#c4976e" stroke="#a07050" stroke-width="0.5"/><rect x="21" y="13" width="8" height="5" rx="0.5" fill="#c4976e" stroke="#a07050" stroke-width="0.5"/><rect x="7" y="19" width="8" height="5" rx="0.5" fill="#c4976e" stroke="#a07050" stroke-width="0.5"/><rect x="16" y="19" width="8" height="5" rx="0.5" fill="#c4976e" stroke="#a07050" stroke-width="0.5"/><rect x="3" y="25" width="8" height="3" rx="0.5" fill="#c4976e" stroke="#a07050" stroke-width="0.5"/><rect x="12" y="25" width="8" height="3" rx="0.5" fill="#c4976e" stroke="#a07050" stroke-width="0.5"/><rect x="21" y="25" width="8" height="3" rx="0.5" fill="#c4976e" stroke="#a07050" stroke-width="0.5"/></svg>
+            <svg viewBox="0 0 32 32" width="22" height="22"><rect x="2" y="12" width="28" height="16" rx="1" fill="#b0855e"/><rect x="3" y="13" width="8" height="5" rx="0.5" fill="#c4976e" stroke="#a07050" stroke-width="0.5"/><rect x="12" y="13" width="8" height="5" rx="0.5" fill="#c4976e" stroke="#a07050" stroke-width="0.5"/><rect x="21" y="13" width="8" height="5" rx="0.5" fill="#c4976e" stroke="#a07050" stroke-width="0.5"/></svg>
             Walls
           </button>
           <button class="cat-tab" data-category="paths">
-            <svg viewBox="0 0 32 32" width="22" height="22"><path d="M10 2 C12 10, 20 14, 18 22 C17 26, 14 30, 16 30" stroke="#b0855e" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M10 2 C12 10, 20 14, 18 22 C17 26, 14 30, 16 30" stroke="#d4a76a" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="2 4"/></svg>
+            <svg viewBox="0 0 32 32" width="22" height="22"><path d="M10 2 C12 10, 20 14, 18 22 C17 26, 14 30, 16 30" stroke="#b0855e" stroke-width="6" fill="none" stroke-linecap="round"/></svg>
             Paths
           </button>
           <button class="cat-tab" data-category="decor">
-            <svg viewBox="0 0 32 32" width="22" height="22"><circle cx="16" cy="14" r="8" fill="#3498db" opacity="0.6"/><ellipse cx="16" cy="22" rx="10" ry="4" fill="#8B6914"/><path d="M10 10 Q16 4 22 10" stroke="#3498db" stroke-width="2" fill="none"/></svg>
+            <svg viewBox="0 0 32 32" width="22" height="22"><circle cx="16" cy="14" r="8" fill="#3498db" opacity="0.6"/><ellipse cx="16" cy="22" rx="10" ry="4" fill="#8B6914"/></svg>
             Decor
           </button>
         </div>
-        <div class="items-grid" id="itemsGrid">
-          <!-- Items populated by JS -->
-        </div>
+        <div class="items-grid" id="itemsGrid"></div>
       </aside>
 
-      <!-- Canvas Area -->
       <main class="canvas-area" id="canvasArea">
         <div class="canvas-wrapper" id="canvasWrapper">
           <canvas id="mainCanvas"></canvas>
@@ -138,9 +357,7 @@
             <button class="zoom-btn" id="zoomIn">+</button>
             <button class="zoom-btn" id="zoomFit">Fit</button>
           </div>
-          <div class="item-count">
-            <span id="itemCount">0</span> items placed
-          </div>
+          <div class="item-count"><span id="itemCount">0</span> items placed</div>
         </div>
       </main>
     </div>
@@ -153,9 +370,7 @@
           <svg viewBox="0 0 32 32" width="28" height="28"><rect x="4" y="4" width="24" height="28" rx="3" fill="#43b87a"/><rect x="8" y="8" width="16" height="3" rx="1" fill="#fff"/><rect x="8" y="14" width="12" height="2" rx="1" fill="#fff" opacity="0.7"/><rect x="8" y="18" width="14" height="2" rx="1" fill="#fff" opacity="0.7"/><rect x="8" y="22" width="10" height="2" rx="1" fill="#fff" opacity="0.7"/><rect x="8" y="26" width="16" height="3" rx="1" fill="#f5a623"/></svg>
           Your Estimate
         </h2>
-        <div class="estimate-list" id="estimateList">
-          <!-- Populated by JS -->
-        </div>
+        <div class="estimate-list" id="estimateList"></div>
         <div class="estimate-total-section">
           <div class="estimate-total-row">
             <span class="estimate-total-label">Estimated Materials Total</span>
@@ -167,20 +382,263 @@
           <p><strong>Important:</strong> This estimate reflects <strong>materials only</strong> and does <strong>NOT</strong> include any site preparation, labor, delivery, equipment rental, permits, or installation costs. Actual project costs will vary. Please consult a licensed landscaping professional for a complete project bid.</p>
         </div>
         <div class="modal-actions">
-          <button class="btn-print" id="btnPrint">
-            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M6 9V2H18V9M6 18H4C2.9 18 2 17.1 2 16V11C2 9.9 2.9 9 4 9H20C21.1 9 22 9.9 22 11V16C22 17.1 21.1 18 20 18H18M6 14H18V22H6Z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-            Print Estimate
-          </button>
-          <button class="btn-save-design" id="btnSaveDesign">
-            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M21 15V19C21 20.1 20.1 21 19 21H5C3.9 21 3 20.1 3 19V15M7 10L12 15M12 15L17 10M12 15V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Save Design
-          </button>
+          <button class="btn-print" id="btnPrint">Print Estimate</button>
+          <button class="btn-save-design" id="btnSaveDesign">Save Design</button>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="items-data.js"></script>
-  <script src="app.js"></script>
+  <script>
+// ── Items Catalog ──────────────────────────────────────
+const ITEMS_CATALOG = {
+  trees: [
+    { id:'oak-tree', name:'Oak Tree', price:350, width:140, height:180,
+      svg:`<svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg"><rect x="60" y="120" width="20" height="55" rx="3" fill="#6B4226"/><rect x="62" y="120" width="6" height="55" fill="#7D5233" opacity="0.5"/><ellipse cx="70" cy="75" rx="55" ry="55" fill="#2E7D32"/><ellipse cx="45" cy="60" rx="35" ry="35" fill="#388E3C"/><ellipse cx="90" cy="65" rx="30" ry="30" fill="#388E3C"/><ellipse cx="70" cy="45" rx="30" ry="28" fill="#43A047"/><ellipse cx="55" cy="80" rx="20" ry="15" fill="#4CAF50" opacity="0.6"/><ellipse cx="85" cy="50" rx="15" ry="12" fill="#66BB6A" opacity="0.5"/></svg>` },
+    { id:'maple-tree', name:'Maple Tree', price:300, width:130, height:170,
+      svg:`<svg viewBox="0 0 130 170" xmlns="http://www.w3.org/2000/svg"><rect x="55" y="110" width="18" height="55" rx="3" fill="#6B4226"/><path d="M65 15 C30 40,10 70,15 100 C18 115,35 125,65 120 C95 125,112 115,115 100 C120 70,100 40,65 15Z" fill="#C62828"/><path d="M65 25 C40 45,25 70,30 95 C32 105,45 112,65 108" fill="#D32F2F" opacity="0.7"/><ellipse cx="50" cy="70" rx="18" ry="15" fill="#EF5350" opacity="0.4"/><ellipse cx="80" cy="60" rx="15" ry="12" fill="#FF8A65" opacity="0.3"/></svg>` },
+    { id:'pine-tree', name:'Pine Tree', price:200, width:100, height:190,
+      svg:`<svg viewBox="0 0 100 190" xmlns="http://www.w3.org/2000/svg"><rect x="42" y="140" width="16" height="45" rx="2" fill="#5D4037"/><path d="M50 10 L15 75 H30 L10 120 H25 L5 155 H95 L75 120 H90 L70 75 H85Z" fill="#1B5E20"/><path d="M50 10 L30 55 H40 L25 90 H35 L20 130 H50Z" fill="#2E7D32" opacity="0.6"/></svg>` },
+    { id:'palm-tree', name:'Palm Tree', price:450, width:140, height:200,
+      svg:`<svg viewBox="0 0 140 200" xmlns="http://www.w3.org/2000/svg"><path d="M65 60 C63 90,60 140,62 190 C62 192,78 192,78 190 C80 140,77 90,75 60Z" fill="#8D6E63"/><path d="M70 55 C50 30,15 25,2 35" stroke="#2E7D32" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M70 50 C85 20,120 10,138 18" stroke="#2E7D32" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M68 58 C45 45,10 50,5 65" stroke="#388E3C" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M72 58 C95 45,130 50,135 65" stroke="#388E3C" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M70 52 C60 30,55 10,70 2" stroke="#43A047" stroke-width="6" fill="none" stroke-linecap="round"/><ellipse cx="70" cy="55" rx="8" ry="6" fill="#33691E"/></svg>` },
+    { id:'cherry-blossom', name:'Cherry Blossom', price:500, width:150, height:175,
+      svg:`<svg viewBox="0 0 150 175" xmlns="http://www.w3.org/2000/svg"><rect x="65" y="110" width="18" height="60" rx="3" fill="#5D4037"/><ellipse cx="75" cy="65" rx="55" ry="50" fill="#F8BBD0"/><ellipse cx="50" cy="55" rx="32" ry="30" fill="#F48FB1"/><ellipse cx="100" cy="58" rx="30" ry="28" fill="#F48FB1"/><ellipse cx="75" cy="40" rx="28" ry="25" fill="#F06292"/><circle cx="40" cy="45" r="4" fill="#EC407A"/><circle cx="42" cy="43" r="2" fill="#FCE4EC"/><circle cx="60" cy="35" r="4" fill="#EC407A"/><circle cx="62" cy="33" r="2" fill="#FCE4EC"/><circle cx="90" cy="38" r="4" fill="#EC407A"/><circle cx="92" cy="36" r="2" fill="#FCE4EC"/><circle cx="75" cy="28" r="3.5" fill="#EC407A"/><circle cx="77" cy="26" r="1.8" fill="#FCE4EC"/></svg>` },
+    { id:'birch-tree', name:'Birch Tree', price:275, width:110, height:195,
+      svg:`<svg viewBox="0 0 110 195" xmlns="http://www.w3.org/2000/svg"><rect x="47" y="80" width="16" height="110" rx="2" fill="#F5F5F5"/><rect x="49" y="90" width="4" height="8" rx="1" fill="#424242" opacity="0.5"/><rect x="53" y="110" width="5" height="6" rx="1" fill="#424242" opacity="0.4"/><rect x="48" y="135" width="6" height="7" rx="1" fill="#424242" opacity="0.5"/><ellipse cx="55" cy="55" rx="42" ry="48" fill="#8BC34A"/><ellipse cx="38" cy="42" rx="25" ry="28" fill="#9CCC65"/><ellipse cx="72" cy="48" rx="22" ry="25" fill="#9CCC65"/><ellipse cx="55" cy="30" rx="20" ry="22" fill="#AED581"/></svg>` }
+  ],
+  flowers: [
+    { id:'rose-bush', name:'Rose Bush', price:45, width:70, height:65,
+      svg:`<svg viewBox="0 0 70 65" xmlns="http://www.w3.org/2000/svg"><ellipse cx="35" cy="45" rx="30" ry="18" fill="#2E7D32"/><ellipse cx="25" cy="42" rx="18" ry="14" fill="#388E3C"/><ellipse cx="45" cy="42" rx="18" ry="14" fill="#388E3C"/><circle cx="20" cy="30" r="8" fill="#E53935"/><circle cx="20" cy="30" r="5" fill="#C62828"/><circle cx="20" cy="30" r="2.5" fill="#EF5350"/><circle cx="38" cy="25" r="9" fill="#E53935"/><circle cx="38" cy="25" r="6" fill="#C62828"/><circle cx="38" cy="25" r="3" fill="#EF5350"/><circle cx="52" cy="32" r="7" fill="#E53935"/><circle cx="52" cy="32" r="4.5" fill="#C62828"/></svg>` },
+    { id:'lavender', name:'Lavender', price:25, width:55, height:70,
+      svg:`<svg viewBox="0 0 55 70" xmlns="http://www.w3.org/2000/svg"><line x1="15" y1="50" x2="15" y2="25" stroke="#4CAF50" stroke-width="2"/><line x1="27" y1="50" x2="27" y2="15" stroke="#4CAF50" stroke-width="2"/><line x1="40" y1="50" x2="40" y2="22" stroke="#4CAF50" stroke-width="2"/><ellipse cx="27" cy="55" rx="25" ry="12" fill="#4CAF50"/><circle cx="15" cy="25" r="3" fill="#7B1FA2"/><circle cx="15" cy="20" r="2.8" fill="#8E24AA"/><circle cx="15" cy="15" r="2.5" fill="#9C27B0"/><circle cx="27" cy="15" r="3" fill="#7B1FA2"/><circle cx="27" cy="10" r="2.8" fill="#8E24AA"/><circle cx="27" cy="5" r="2.5" fill="#9C27B0"/><circle cx="40" cy="22" r="3" fill="#7B1FA2"/><circle cx="40" cy="17" r="2.8" fill="#8E24AA"/><circle cx="40" cy="13" r="2.5" fill="#9C27B0"/></svg>` },
+    { id:'sunflower-patch', name:'Sunflower Patch', price:35, width:80, height:85,
+      svg:`<svg viewBox="0 0 80 85" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="72" rx="35" ry="12" fill="#388E3C"/><line x1="20" y1="70" x2="20" y2="30" stroke="#4CAF50" stroke-width="3"/><line x1="42" y1="70" x2="42" y2="18" stroke="#4CAF50" stroke-width="3"/><line x1="62" y1="70" x2="62" y2="28" stroke="#4CAF50" stroke-width="3"/><g transform="translate(20,25)"><circle r="10" fill="#F9A825"/><circle r="5" fill="#5D4037"/><ellipse cx="-8" cy="0" rx="5" ry="3" fill="#FDD835"/><ellipse cx="8" cy="0" rx="5" ry="3" fill="#FDD835"/><ellipse cx="0" cy="-8" rx="3" ry="5" fill="#FDD835"/><ellipse cx="0" cy="8" rx="3" ry="5" fill="#FDD835"/></g><g transform="translate(42,13)"><circle r="11" fill="#F9A825"/><circle r="5.5" fill="#5D4037"/><ellipse cx="-9" cy="0" rx="5.5" ry="3.2" fill="#FDD835"/><ellipse cx="9" cy="0" rx="5.5" ry="3.2" fill="#FDD835"/><ellipse cx="0" cy="-9" rx="3.2" ry="5.5" fill="#FDD835"/><ellipse cx="0" cy="9" rx="3.2" ry="5.5" fill="#FDD835"/></g><g transform="translate(62,23)"><circle r="9" fill="#F9A825"/><circle r="4.5" fill="#5D4037"/></g></svg>` },
+    { id:'tulip-bed', name:'Tulip Bed', price:40, width:85, height:55,
+      svg:`<svg viewBox="0 0 85 55" xmlns="http://www.w3.org/2000/svg"><ellipse cx="42" cy="45" rx="38" ry="10" fill="#388E3C"/><g transform="translate(15,20)"><line x1="0" y1="20" x2="0" y2="5" stroke="#4CAF50" stroke-width="2"/><path d="M0 5 C-5 0,-6-8,0-10 C6-8,5 0,0 5Z" fill="#E53935"/></g><g transform="translate(28,15)"><line x1="0" y1="22" x2="0" y2="5" stroke="#4CAF50" stroke-width="2"/><path d="M0 5 C-5 0,-6-8,0-10 C6-8,5 0,0 5Z" fill="#FDD835"/></g><g transform="translate(42,18)"><line x1="0" y1="20" x2="0" y2="5" stroke="#4CAF50" stroke-width="2"/><path d="M0 5 C-5 0,-6-8,0-10 C6-8,5 0,0 5Z" fill="#AB47BC"/></g><g transform="translate(55,14)"><line x1="0" y1="22" x2="0" y2="5" stroke="#4CAF50" stroke-width="2"/><path d="M0 5 C-5 0,-6-8,0-10 C6-8,5 0,0 5Z" fill="#F06292"/></g><g transform="translate(68,20)"><line x1="0" y1="18" x2="0" y2="5" stroke="#4CAF50" stroke-width="2"/><path d="M0 5 C-5 0,-6-8,0-10 C6-8,5 0,0 5Z" fill="#FF7043"/></g></svg>` },
+    { id:'hydrangea', name:'Hydrangea', price:55, width:75, height:70,
+      svg:`<svg viewBox="0 0 75 70" xmlns="http://www.w3.org/2000/svg"><ellipse cx="37" cy="55" rx="32" ry="14" fill="#2E7D32"/><rect x="34" y="45" width="6" height="18" rx="2" fill="#4CAF50"/><circle cx="37" cy="30" r="22" fill="#64B5F6"/><circle cx="25" cy="25" r="5" fill="#42A5F5"/><circle cx="25" cy="25" r="2.5" fill="#90CAF9"/><circle cx="37" cy="18" r="5.5" fill="#42A5F5"/><circle cx="37" cy="18" r="2.8" fill="#90CAF9"/><circle cx="48" cy="23" r="5" fill="#42A5F5"/><circle cx="48" cy="23" r="2.5" fill="#90CAF9"/><circle cx="30" cy="35" r="5" fill="#1E88E5"/><circle cx="43" cy="35" r="5" fill="#1E88E5"/></svg>` },
+    { id:'peony-bush', name:'Peony Bush', price:65, width:70, height:65,
+      svg:`<svg viewBox="0 0 70 65" xmlns="http://www.w3.org/2000/svg"><ellipse cx="35" cy="50" rx="30" ry="14" fill="#2E7D32"/><ellipse cx="25" cy="45" rx="18" ry="12" fill="#388E3C"/><ellipse cx="45" cy="45" rx="18" ry="12" fill="#388E3C"/><circle cx="22" cy="30" r="10" fill="#F48FB1"/><circle cx="22" cy="30" r="7" fill="#F06292"/><circle cx="22" cy="30" r="4" fill="#EC407A"/><circle cx="40" cy="24" r="12" fill="#F48FB1"/><circle cx="40" cy="24" r="8.5" fill="#F06292"/><circle cx="40" cy="24" r="5" fill="#EC407A"/><circle cx="54" cy="33" r="9" fill="#F48FB1"/><circle cx="54" cy="33" r="6" fill="#F06292"/></svg>` },
+    { id:'ornamental-grass', name:'Ornamental Grass', price:30, width:65, height:70,
+      svg:`<svg viewBox="0 0 65 70" xmlns="http://www.w3.org/2000/svg"><ellipse cx="32" cy="62" rx="25" ry="8" fill="#558B2F"/><path d="M32 60 C30 40,10 20,5 5" stroke="#7CB342" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M32 60 C31 38,18 22,15 8" stroke="#8BC34A" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M32 60 C32 35,28 20,25 5" stroke="#9CCC65" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M32 60 C33 35,37 18,40 3" stroke="#9CCC65" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M32 60 C34 38,45 22,50 8" stroke="#8BC34A" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M32 60 C35 40,52 20,60 5" stroke="#7CB342" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>` }
+  ],
+  shrubs: [
+    { id:'boxwood', name:'Boxwood Hedge', price:80, width:100, height:55,
+      svg:`<svg viewBox="0 0 100 55" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="10" width="90" height="38" rx="8" fill="#2E7D32"/><rect x="8" y="12" width="84" height="34" rx="6" fill="#388E3C"/><ellipse cx="25" cy="25" rx="15" ry="12" fill="#43A047" opacity="0.6"/><ellipse cx="50" cy="22" rx="16" ry="13" fill="#43A047" opacity="0.5"/><ellipse cx="75" cy="25" rx="15" ry="12" fill="#43A047" opacity="0.6"/></svg>` },
+    { id:'holly-bush', name:'Holly Bush', price:60, width:70, height:75,
+      svg:`<svg viewBox="0 0 70 75" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="55" width="10" height="15" rx="2" fill="#5D4037"/><ellipse cx="35" cy="38" rx="30" ry="30" fill="#1B5E20"/><ellipse cx="25" cy="30" rx="18" ry="18" fill="#2E7D32"/><ellipse cx="45" cy="32" rx="17" ry="17" fill="#2E7D32"/><circle cx="20" cy="28" r="3" fill="#C62828"/><circle cx="40" cy="20" r="3" fill="#C62828"/><circle cx="50" cy="35" r="2.5" fill="#C62828"/><circle cx="28" cy="42" r="2.5" fill="#C62828"/></svg>` },
+    { id:'azalea', name:'Azalea', price:55, width:75, height:60,
+      svg:`<svg viewBox="0 0 75 60" xmlns="http://www.w3.org/2000/svg"><ellipse cx="37" cy="45" rx="33" ry="14" fill="#2E7D32"/><ellipse cx="25" cy="40" rx="20" ry="16" fill="#388E3C"/><ellipse cx="50" cy="40" rx="20" ry="16" fill="#388E3C"/><circle cx="15" cy="30" r="7" fill="#CE93D8"/><circle cx="15" cy="30" r="4" fill="#BA68C8"/><circle cx="30" cy="25" r="8" fill="#CE93D8"/><circle cx="30" cy="25" r="5" fill="#BA68C8"/><circle cx="48" cy="27" r="7.5" fill="#CE93D8"/><circle cx="48" cy="27" r="4.5" fill="#BA68C8"/><circle cx="62" cy="32" r="6.5" fill="#CE93D8"/><circle cx="62" cy="32" r="3.8" fill="#BA68C8"/></svg>` },
+    { id:'butterfly-bush', name:'Butterfly Bush', price:40, width:80, height:80,
+      svg:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="65" rx="35" ry="14" fill="#2E7D32"/><path d="M40 68 C35 50,15 40,10 25" stroke="#4CAF50" stroke-width="2.5" fill="none"/><path d="M40 68 C38 45,30 35,25 20" stroke="#4CAF50" stroke-width="2.5" fill="none"/><path d="M40 68 C42 45,50 35,55 20" stroke="#4CAF50" stroke-width="2.5" fill="none"/><path d="M40 68 C45 50,65 40,70 25" stroke="#4CAF50" stroke-width="2.5" fill="none"/><ellipse cx="10" cy="22" rx="7" ry="10" fill="#7B1FA2"/><ellipse cx="25" cy="17" rx="7" ry="10" fill="#7B1FA2"/><ellipse cx="55" cy="17" rx="7" ry="10" fill="#7B1FA2"/><ellipse cx="70" cy="22" rx="7" ry="10" fill="#7B1FA2"/><ellipse cx="40" cy="15" rx="6" ry="9" fill="#8E24AA"/></svg>` }
+  ],
+  walls: [
+    { id:'brick-wall', name:'Brick Wall Section', price:150, width:160, height:70,
+      svg:`<svg viewBox="0 0 160 70" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="5" width="156" height="60" rx="2" fill="#8D6E63"/><g fill="#A1887F" stroke="#795548" stroke-width="0.5"><rect x="4" y="7" width="24" height="12" rx="1"/><rect x="30" y="7" width="24" height="12" rx="1"/><rect x="56" y="7" width="24" height="12" rx="1"/><rect x="82" y="7" width="24" height="12" rx="1"/><rect x="108" y="7" width="24" height="12" rx="1"/><rect x="134" y="7" width="22" height="12" rx="1"/><rect x="16" y="21" width="24" height="12" rx="1"/><rect x="42" y="21" width="24" height="12" rx="1"/><rect x="68" y="21" width="24" height="12" rx="1"/><rect x="94" y="21" width="24" height="12" rx="1"/><rect x="120" y="21" width="24" height="12" rx="1"/><rect x="4" y="35" width="24" height="12" rx="1"/><rect x="30" y="35" width="24" height="12" rx="1"/><rect x="56" y="35" width="24" height="12" rx="1"/><rect x="82" y="35" width="24" height="12" rx="1"/><rect x="108" y="35" width="24" height="12" rx="1"/><rect x="134" y="35" width="22" height="12" rx="1"/><rect x="16" y="49" width="24" height="12" rx="1"/><rect x="42" y="49" width="24" height="12" rx="1"/><rect x="68" y="49" width="24" height="12" rx="1"/><rect x="94" y="49" width="24" height="12" rx="1"/><rect x="120" y="49" width="24" height="12" rx="1"/></g></svg>` },
+    { id:'stone-wall', name:'Stone Wall', price:200, width:160, height:65,
+      svg:`<svg viewBox="0 0 160 65" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="5" width="156" height="55" rx="3" fill="#78909C"/><ellipse cx="20" cy="18" rx="14" ry="9" fill="#90A4AE" stroke="#607D8B" stroke-width="0.8"/><ellipse cx="50" cy="15" rx="12" ry="10" fill="#B0BEC5" stroke="#607D8B" stroke-width="0.8"/><ellipse cx="80" cy="17" rx="16" ry="9" fill="#90A4AE" stroke="#607D8B" stroke-width="0.8"/><ellipse cx="115" cy="16" rx="14" ry="10" fill="#B0BEC5" stroke="#607D8B" stroke-width="0.8"/><ellipse cx="145" cy="18" rx="11" ry="9" fill="#90A4AE" stroke="#607D8B" stroke-width="0.8"/><ellipse cx="35" cy="35" rx="13" ry="9" fill="#90A4AE" stroke="#607D8B" stroke-width="0.8"/><ellipse cx="65" cy="34" rx="15" ry="8" fill="#B0BEC5" stroke="#607D8B" stroke-width="0.8"/><ellipse cx="95" cy="35" rx="12" ry="9" fill="#90A4AE" stroke="#607D8B" stroke-width="0.8"/><ellipse cx="125" cy="33" rx="16" ry="8" fill="#B0BEC5" stroke="#607D8B" stroke-width="0.8"/><ellipse cx="25" cy="50" rx="16" ry="8" fill="#90A4AE" stroke="#607D8B" stroke-width="0.8"/><ellipse cx="58" cy="50" rx="13" ry="7" fill="#B0BEC5" stroke="#607D8B" stroke-width="0.8"/><ellipse cx="90" cy="50" rx="15" ry="8" fill="#90A4AE" stroke="#607D8B" stroke-width="0.8"/></svg>` },
+    { id:'picket-fence', name:'White Picket Fence', price:120, width:160, height:70,
+      svg:`<svg viewBox="0 0 160 70" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="22" width="152" height="5" rx="1" fill="#ECEFF1" stroke="#CFD8DC" stroke-width="0.5"/><rect x="4" y="45" width="152" height="5" rx="1" fill="#ECEFF1" stroke="#CFD8DC" stroke-width="0.5"/><g fill="#F5F5F5" stroke="#CFD8DC" stroke-width="0.8"><path d="M8 60 L8 10 L14 5 L20 10 L20 60Z"/><path d="M26 60 L26 10 L32 5 L38 10 L38 60Z"/><path d="M44 60 L44 10 L50 5 L56 10 L56 60Z"/><path d="M62 60 L62 10 L68 5 L74 10 L74 60Z"/><path d="M80 60 L80 10 L86 5 L92 10 L92 60Z"/><path d="M98 60 L98 10 L104 5 L110 10 L110 60Z"/><path d="M116 60 L116 10 L122 5 L128 10 L128 60Z"/><path d="M134 60 L134 10 L140 5 L146 10 L146 60Z"/></g></svg>` },
+    { id:'retaining-wall', name:'Retaining Wall', price:250, width:170, height:80,
+      svg:`<svg viewBox="0 0 170 80" xmlns="http://www.w3.org/2000/svg"><path d="M5 75 L5 20 L165 10 L165 75Z" fill="#8D6E63"/><path d="M5 20 L165 10 L165 18 L5 28Z" fill="#A1887F"/><g fill="#BCAAA4" stroke="#795548" stroke-width="0.6"><rect x="7" y="28" width="30" height="14" rx="1"/><rect x="39" y="27" width="28" height="14" rx="1"/><rect x="69" y="26" width="32" height="14" rx="1"/><rect x="103" y="25" width="28" height="14" rx="1"/><rect x="133" y="24" width="30" height="14" rx="1"/><rect x="20" y="44" width="28" height="14" rx="1"/><rect x="50" y="43" width="32" height="14" rx="1"/><rect x="84" y="42" width="28" height="14" rx="1"/><rect x="114" y="41" width="30" height="14" rx="1"/><rect x="7" y="60" width="30" height="13" rx="1"/><rect x="39" y="60" width="28" height="13" rx="1"/><rect x="69" y="59" width="32" height="13" rx="1"/><rect x="103" y="58" width="28" height="13" rx="1"/><rect x="133" y="57" width="30" height="13" rx="1"/></g></svg>` }
+  ],
+  paths: [
+    { id:'stone-path', name:'Stepping Stones', price:85, width:120, height:50,
+      svg:`<svg viewBox="0 0 120 50" xmlns="http://www.w3.org/2000/svg"><ellipse cx="18" cy="25" rx="14" ry="11" fill="#B0BEC5" stroke="#90A4AE" stroke-width="1"/><ellipse cx="48" cy="22" rx="15" ry="12" fill="#CFD8DC" stroke="#90A4AE" stroke-width="1"/><ellipse cx="78" cy="28" rx="14" ry="10" fill="#B0BEC5" stroke="#90A4AE" stroke-width="1"/><ellipse cx="106" cy="24" rx="12" ry="11" fill="#CFD8DC" stroke="#90A4AE" stroke-width="1"/></svg>` },
+    { id:'gravel-path', name:'Gravel Pathway', price:95, width:140, height:45,
+      svg:`<svg viewBox="0 0 140 45" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="8" width="136" height="28" rx="4" fill="#D7CCC8"/><rect x="4" y="10" width="132" height="24" rx="3" fill="#EFEBE9"/><g fill="#BCAAA4" opacity="0.6"><circle cx="12" cy="20" r="2"/><circle cx="28" cy="18" r="2.2"/><circle cx="45" cy="22" r="2"/><circle cx="60" cy="28" r="2.2"/><circle cx="78" cy="26" r="2"/><circle cx="92" cy="24" r="2.2"/><circle cx="108" cy="28" r="2"/><circle cx="122" cy="26" r="2.2"/><circle cx="130" cy="18" r="1.8"/></g></svg>` },
+    { id:'flagstone-path', name:'Flagstone Path', price:130, width:130, height:50,
+      svg:`<svg viewBox="0 0 130 50" xmlns="http://www.w3.org/2000/svg"><path d="M5 10 L25 8 L28 22 L8 24Z" fill="#BCAAA4" stroke="#A1887F" stroke-width="1"/><path d="M28 6 L52 5 L54 20 L30 22Z" fill="#D7CCC8" stroke="#A1887F" stroke-width="1"/><path d="M6 26 L30 24 L32 40 L8 42Z" fill="#D7CCC8" stroke="#A1887F" stroke-width="1"/><path d="M32 23 L56 22 L58 38 L34 40Z" fill="#BCAAA4" stroke="#A1887F" stroke-width="1"/><path d="M55 4 L78 6 L76 22 L57 20Z" fill="#BCAAA4" stroke="#A1887F" stroke-width="1"/><path d="M59 22 L82 24 L80 42 L57 38Z" fill="#D7CCC8" stroke="#A1887F" stroke-width="1"/><path d="M80 5 L105 8 L103 24 L78 22Z" fill="#D7CCC8" stroke="#A1887F" stroke-width="1"/><path d="M82 26 L106 28 L104 44 L80 42Z" fill="#BCAAA4" stroke="#A1887F" stroke-width="1"/><path d="M106 7 L125 10 L123 26 L104 24Z" fill="#BCAAA4" stroke="#A1887F" stroke-width="1"/></svg>` },
+    { id:'mulch-bed', name:'Mulch Bed', price:40, width:120, height:40,
+      svg:`<svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="20" rx="56" ry="16" fill="#5D4037"/><ellipse cx="60" cy="18" rx="52" ry="13" fill="#6D4C41"/><g fill="#795548" opacity="0.7"><ellipse cx="20" cy="18" rx="8" ry="3"/><ellipse cx="40" cy="15" rx="10" ry="3.5"/><ellipse cx="65" cy="20" rx="9" ry="3"/><ellipse cx="85" cy="16" rx="8" ry="3.5"/></g></svg>` }
+  ],
+  decor: [
+    { id:'bird-bath', name:'Bird Bath', price:120, width:55, height:75,
+      svg:`<svg viewBox="0 0 55 75" xmlns="http://www.w3.org/2000/svg"><ellipse cx="27" cy="70" rx="18" ry="5" fill="#90A4AE"/><rect x="24" y="35" width="7" height="35" rx="2" fill="#B0BEC5"/><ellipse cx="27" cy="35" rx="24" ry="8" fill="#90A4AE"/><ellipse cx="27" cy="33" rx="22" ry="7" fill="#B0BEC5"/><ellipse cx="27" cy="33" rx="18" ry="5" fill="#64B5F6" opacity="0.6"/></svg>` },
+    { id:'garden-bench', name:'Garden Bench', price:220, width:100, height:60,
+      svg:`<svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="25" width="84" height="6" rx="2" fill="#8D6E63"/><rect x="10" y="18" width="80" height="4" rx="1" fill="#A1887F"/><rect x="10" y="12" width="80" height="4" rx="1" fill="#A1887F"/><rect x="8" y="6" width="4" height="48" rx="1" fill="#6D4C41"/><rect x="88" y="6" width="4" height="48" rx="1" fill="#6D4C41"/><rect x="12" y="32" width="5" height="22" rx="1" fill="#6D4C41"/><rect x="83" y="32" width="5" height="22" rx="1" fill="#6D4C41"/></svg>` },
+    { id:'fountain', name:'Garden Fountain', price:450, width:80, height:95,
+      svg:`<svg viewBox="0 0 80 95" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="88" rx="35" ry="7" fill="#78909C"/><ellipse cx="40" cy="85" rx="32" ry="6" fill="#90A4AE"/><ellipse cx="40" cy="85" rx="28" ry="4.5" fill="#64B5F6" opacity="0.5"/><rect x="35" y="60" width="10" height="25" rx="2" fill="#B0BEC5"/><ellipse cx="40" cy="60" rx="22" ry="6" fill="#78909C"/><ellipse cx="40" cy="58" rx="20" ry="5" fill="#90A4AE"/><ellipse cx="40" cy="58" rx="16" ry="3.5" fill="#64B5F6" opacity="0.5"/><rect x="37" y="38" width="6" height="20" rx="2" fill="#B0BEC5"/><ellipse cx="40" cy="38" rx="12" ry="4.5" fill="#78909C"/><path d="M40 32 C38 22,35 15,40 10 C45 15,42 22,40 32Z" fill="#64B5F6" opacity="0.6"/></svg>` },
+    { id:'solar-lights', name:'Solar Path Lights (set)', price:60, width:130, height:50,
+      svg:`<svg viewBox="0 0 130 50" xmlns="http://www.w3.org/2000/svg"><g transform="translate(15,0)"><rect x="4" y="20" width="3" height="25" rx="1" fill="#757575"/><path d="M0 20 L5.5 12 L11 20Z" fill="#FDD835"/><circle cx="5.5" cy="10" r="5" fill="#FFF9C4" opacity="0.4"/></g><g transform="translate(45,0)"><rect x="4" y="20" width="3" height="25" rx="1" fill="#757575"/><path d="M0 20 L5.5 12 L11 20Z" fill="#FDD835"/><circle cx="5.5" cy="10" r="5" fill="#FFF9C4" opacity="0.4"/></g><g transform="translate(75,0)"><rect x="4" y="20" width="3" height="25" rx="1" fill="#757575"/><path d="M0 20 L5.5 12 L11 20Z" fill="#FDD835"/><circle cx="5.5" cy="10" r="5" fill="#FFF9C4" opacity="0.4"/></g><g transform="translate(105,0)"><rect x="4" y="20" width="3" height="25" rx="1" fill="#757575"/><path d="M0 20 L5.5 12 L11 20Z" fill="#FDD835"/><circle cx="5.5" cy="10" r="5" fill="#FFF9C4" opacity="0.4"/></g></svg>` },
+    { id:'planter-pot', name:'Large Planter Pot', price:75, width:55, height:60,
+      svg:`<svg viewBox="0 0 55 60" xmlns="http://www.w3.org/2000/svg"><path d="M8 18 L12 55 L43 55 L47 18Z" fill="#E64A19"/><rect x="5" y="14" width="45" height="6" rx="2" fill="#BF360C"/><ellipse cx="27" cy="14" rx="22" ry="4" fill="#D84315"/><ellipse cx="18" cy="8" rx="8" ry="8" fill="#4CAF50"/><ellipse cx="34" cy="6" rx="9" ry="9" fill="#388E3C"/><ellipse cx="27" cy="3" rx="7" ry="7" fill="#66BB6A"/><circle cx="22" cy="4" r="3" fill="#E91E63"/><circle cx="32" cy="2" r="2.5" fill="#FDD835"/></svg>` },
+    { id:'rock-boulder', name:'Decorative Boulder', price:95, width:70, height:50,
+      svg:`<svg viewBox="0 0 70 50" xmlns="http://www.w3.org/2000/svg"><ellipse cx="35" cy="35" rx="32" ry="14" fill="#757575"/><ellipse cx="35" cy="28" rx="28" ry="18" fill="#9E9E9E"/><ellipse cx="30" cy="25" rx="22" ry="15" fill="#BDBDBD" opacity="0.5"/><path d="M18 20 C22 15,38 12,50 18" stroke="#E0E0E0" stroke-width="1.5" fill="none" opacity="0.5"/></svg>` },
+    { id:'trellis', name:'Garden Trellis', price:85, width:50, height:100,
+      svg:`<svg viewBox="0 0 50 100" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="3" height="90" rx="1" fill="#8D6E63"/><rect x="44" y="5" width="3" height="90" rx="1" fill="#8D6E63"/><line x1="6" y1="15" x2="44" y2="15" stroke="#A1887F" stroke-width="2"/><line x1="6" y1="30" x2="44" y2="30" stroke="#A1887F" stroke-width="2"/><line x1="6" y1="45" x2="44" y2="45" stroke="#A1887F" stroke-width="2"/><line x1="6" y1="60" x2="44" y2="60" stroke="#A1887F" stroke-width="2"/><line x1="6" y1="75" x2="44" y2="75" stroke="#A1887F" stroke-width="2"/><path d="M10 80 C12 65,20 55,15 40 C12 30,18 20,22 12" stroke="#4CAF50" stroke-width="2" fill="none"/><path d="M38 85 C36 70,30 58,35 45 C38 35,32 25,28 15" stroke="#388E3C" stroke-width="2" fill="none"/><circle cx="22" cy="12" r="3" fill="#E91E63"/><circle cx="35" cy="43" r="3" fill="#E91E63"/></svg>` }
+  ]
+};
+  </script>
+  <script>
+// ── App Logic ──────────────────────────────────────────
+(function () {
+  'use strict';
+  const state = { photo:null, photoImg:null, placedItems:[], selectedId:null, activeTool:'select',
+    activeCategory:'trees', zoom:1, history:[], historyIndex:-1, nextId:1, dragState:null };
+
+  const $ = s => document.querySelector(s);
+  const $$ = s => document.querySelectorAll(s);
+
+  const splash=$('#splash'), editor=$('#editor'), uploadZone=$('#uploadZone'), fileInput=$('#fileInput'),
+    btnDemo=$('#btnDemo'), canvas=$('#mainCanvas'), ctx=canvas.getContext('2d'),
+    canvasWrapper=$('#canvasWrapper'), placedLayer=$('#placedItemsLayer'), itemsGrid=$('#itemsGrid'),
+    categoryTabs=$('#categoryTabs'), searchInput=$('#searchInput'), zoomLevel=$('#zoomLevel'),
+    itemCount=$('#itemCount'), estimateModal=$('#estimateModal'), estimateList=$('#estimateList'),
+    estimateTotal=$('#estimateTotal');
+
+  // Upload
+  uploadZone.addEventListener('click', () => fileInput.click());
+  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+  uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('drag-over');
+    const f=e.dataTransfer.files[0]; if(f&&f.type.startsWith('image/')) loadPhoto(f); });
+  fileInput.addEventListener('change', e => { if(e.target.files[0]) loadPhoto(e.target.files[0]); });
+  btnDemo.addEventListener('click', loadDemoPhoto);
+
+  function loadPhoto(file) {
+    const r=new FileReader(); r.onload=e=>{const img=new Image();img.onload=()=>{state.photoImg=img;showEditor()};img.src=e.target.result};r.readAsDataURL(file);
+  }
+  function loadDemoPhoto() {
+    const cv=document.createElement('canvas');cv.width=1200;cv.height=750;const c=cv.getContext('2d');
+    const sky=c.createLinearGradient(0,0,0,400);sky.addColorStop(0,'#87CEEB');sky.addColorStop(1,'#E0F7FA');c.fillStyle=sky;c.fillRect(0,0,1200,400);
+    c.fillStyle='#FFF9C4';c.beginPath();c.arc(950,80,50,0,Math.PI*2);c.fill();c.fillStyle='#FFF176';c.beginPath();c.arc(950,80,35,0,Math.PI*2);c.fill();
+    function cloud(cx,cy,s){c.fillStyle='rgba(255,255,255,0.85)';c.beginPath();c.arc(cx,cy,s,0,Math.PI*2);c.fill();c.beginPath();c.arc(cx-s*.8,cy+s*.2,s*.7,0,Math.PI*2);c.fill();c.beginPath();c.arc(cx+s*.8,cy+s*.2,s*.7,0,Math.PI*2);c.fill();}
+    cloud(200,60,30);cloud(500,100,25);cloud(750,50,35);
+    const grass=c.createLinearGradient(0,380,0,750);grass.addColorStop(0,'#66BB6A');grass.addColorStop(1,'#388E3C');c.fillStyle=grass;c.fillRect(0,380,1200,370);
+    c.fillStyle='#BDBDBD';c.beginPath();c.moveTo(752,748);c.lineTo(848,748);c.lineTo(778,472);c.lineTo(702,472);c.closePath();c.fill();
+    c.fillStyle='#EFEBE9';c.fillRect(280,240,500,240);
+    c.fillStyle='#5D4037';c.fillRect(490,340,60,140);c.fillStyle='#8D6E63';c.fillRect(495,345,50,130);
+    c.fillStyle='#FDD835';c.beginPath();c.arc(535,420,4,0,Math.PI*2);c.fill();
+    function win(x,y,w,h){c.fillStyle='#81D4FA';c.fillRect(x,y,w,h);c.strokeStyle='#ECEFF1';c.lineWidth=3;c.strokeRect(x,y,w,h);c.beginPath();c.moveTo(x+w/2,y);c.lineTo(x+w/2,y+h);c.stroke();c.beginPath();c.moveTo(x,y+h/2);c.lineTo(x+w,y+h/2);c.stroke();}
+    win(330,300,70,60);win(430,300,50,60);win(560,300,50,60);win(650,300,70,60);
+    c.fillStyle='#795548';c.beginPath();c.moveTo(250,250);c.lineTo(530,130);c.lineTo(810,250);c.closePath();c.fill();
+    c.fillStyle='#6D4C41';c.beginPath();c.moveTo(260,250);c.lineTo(530,140);c.lineTo(530,130);c.lineTo(250,250);c.closePath();c.fill();
+    c.fillStyle='#8D6E63';c.fillRect(650,150,35,80);c.fillStyle='#795548';c.fillRect(645,145,45,12);
+    c.fillStyle='#E0E0E0';c.fillRect(680,350,100,130);c.fillStyle='#BDBDBD';c.fillRect(688,360,84,110);
+    for(let i=0;i<8;i++){c.fillStyle='#9E9E9E';c.fillRect(688,365+i*14,84,2);}
+    c.fillStyle='#D7CCC8';c.fillRect(460,475,120,10);c.fillStyle='#BCAAA4';c.fillRect(480,485,80,10);c.fillRect(490,495,60,10);
+    const d=cv.toDataURL();const img=new Image();img.onload=()=>{state.photoImg=img;showEditor()};img.src=d;
+  }
+
+  function showEditor(){splash.classList.add('hidden');editor.classList.remove('hidden');fitCanvas();renderCanvas();populateItems(state.activeCategory);saveHistory();}
+  function fitCanvas(){const r=canvasWrapper.getBoundingClientRect(),img=state.photoImg,s=Math.min(r.width/img.width,r.height/img.height,1);
+    canvas.width=img.width*s;canvas.height=img.height*s;placedLayer.style.width=canvas.width+'px';placedLayer.style.height=canvas.height+'px';state.zoom=1;zoomLevel.textContent='100%';}
+  function renderCanvas(){ctx.clearRect(0,0,canvas.width,canvas.height);if(state.photoImg)ctx.drawImage(state.photoImg,0,0,canvas.width,canvas.height);}
+  function applyZoom(){canvasWrapper.style.transform=`scale(${state.zoom})`;zoomLevel.textContent=Math.round(state.zoom*100)+'%';}
+
+  $('#zoomIn').addEventListener('click',()=>{state.zoom=Math.min(state.zoom+0.1,3);applyZoom()});
+  $('#zoomOut').addEventListener('click',()=>{state.zoom=Math.max(state.zoom-0.1,0.3);applyZoom()});
+  $('#zoomFit').addEventListener('click',()=>{state.zoom=1;applyZoom()});
+
+  // Categories
+  categoryTabs.addEventListener('click',e=>{const t=e.target.closest('.cat-tab');if(!t)return;$$('.cat-tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');state.activeCategory=t.dataset.category;populateItems(t.dataset.category);});
+  searchInput.addEventListener('input',e=>{const q=e.target.value.toLowerCase();if(!q){populateItems(state.activeCategory);return;}const all=[];Object.values(ITEMS_CATALOG).forEach(c=>c.forEach(i=>{if(i.name.toLowerCase().includes(q))all.push(i)}));renderItemsGrid(all);});
+
+  function populateItems(cat){renderItemsGrid(ITEMS_CATALOG[cat]||[]);}
+  function renderItemsGrid(items){itemsGrid.innerHTML='';items.forEach(item=>{
+    const card=document.createElement('div');card.className='item-card';card.draggable=true;card.dataset.itemId=item.id;
+    card.innerHTML=`<div class="item-preview">${item.svg}</div><div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">$${item.price}</span></div>`;
+    card.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',item.id);e.dataTransfer.effectAllowed='copy';
+      const g=document.createElement('div');g.innerHTML=item.svg;g.style.cssText='position:fixed;top:-9999px;width:80px;height:80px;opacity:0.8;';document.body.appendChild(g);e.dataTransfer.setDragImage(g,40,40);setTimeout(()=>g.remove(),0);});
+    card.addEventListener('dblclick',()=>addItemToCanvas(item,canvas.width/2-item.width/2,canvas.height/2-item.height/2));
+    itemsGrid.appendChild(card);});}
+
+  // Drop
+  canvasWrapper.addEventListener('dragover',e=>{e.preventDefault();e.dataTransfer.dropEffect='copy';canvasWrapper.classList.add('drop-hover');});
+  canvasWrapper.addEventListener('dragleave',()=>canvasWrapper.classList.remove('drop-hover'));
+  canvasWrapper.addEventListener('drop',e=>{e.preventDefault();canvasWrapper.classList.remove('drop-hover');
+    const id=e.dataTransfer.getData('text/plain');if(!id)return;const item=findCatalogItem(id);if(!item)return;
+    const r=canvasWrapper.getBoundingClientRect();addItemToCanvas(item,(e.clientX-r.left)/state.zoom-item.width/2,(e.clientY-r.top)/state.zoom-item.height/2);});
+
+  function findCatalogItem(id){for(const c of Object.values(ITEMS_CATALOG)){const f=c.find(i=>i.id===id);if(f)return f;}return null;}
+
+  function addItemToCanvas(ci,x,y){const id='p-'+state.nextId++,w=ci.width,h=ci.height;
+    const el=document.createElement('div');el.className='placed-item';el.dataset.placedId=id;el.innerHTML=ci.svg;
+    el.style.left=x+'px';el.style.top=y+'px';el.style.width=w+'px';el.style.height=h+'px';
+    placedLayer.appendChild(el);const pi={id,catalogId:ci.id,x,y,w,h,rotation:0,el};state.placedItems.push(pi);
+    updateItemCount();saveHistory();selectItem(id);attachItemEvents(el,pi);el.classList.add('item-enter');setTimeout(()=>el.classList.remove('item-enter'),400);}
+
+  function attachItemEvents(el,pi){
+    el.addEventListener('mousedown',e=>{e.stopPropagation();if(state.activeTool==='delete'){removeItem(pi.id);return;}
+      selectItem(pi.id);if(state.activeTool==='select'){const r=el.getBoundingClientRect();state.dragState={itemId:pi.id,offsetX:e.clientX-r.left,offsetY:e.clientY-r.top};}});
+    el.addEventListener('touchstart',e=>{e.stopPropagation();if(state.activeTool==='delete'){removeItem(pi.id);return;}
+      selectItem(pi.id);const t=e.touches[0],r=el.getBoundingClientRect();state.dragState={itemId:pi.id,offsetX:t.clientX-r.left,offsetY:t.clientY-r.top};},{passive:false});}
+
+  // Move
+  document.addEventListener('mousemove',e=>{if(!state.dragState||!state.dragState.itemId)return;const item=state.placedItems.find(i=>i.id===state.dragState.itemId);if(!item)return;
+    const wr=canvasWrapper.getBoundingClientRect();let nx=(e.clientX-wr.left)/state.zoom-state.dragState.offsetX,ny=(e.clientY-wr.top)/state.zoom-state.dragState.offsetY;
+    nx=Math.max(-item.w/2,Math.min(canvas.width-item.w/2,nx));ny=Math.max(-item.h/2,Math.min(canvas.height-item.h/2,ny));
+    item.x=nx;item.y=ny;item.el.style.left=nx+'px';item.el.style.top=ny+'px';});
+  document.addEventListener('mouseup',()=>{if(state.dragState&&state.dragState.itemId)saveHistory();state.dragState=null;});
+  document.addEventListener('touchmove',e=>{if(!state.dragState||!state.dragState.itemId)return;e.preventDefault();const t=e.touches[0];
+    const item=state.placedItems.find(i=>i.id===state.dragState.itemId);if(!item)return;
+    const wr=canvasWrapper.getBoundingClientRect();let nx=(t.clientX-wr.left)/state.zoom-state.dragState.offsetX,ny=(t.clientY-wr.top)/state.zoom-state.dragState.offsetY;
+    nx=Math.max(-item.w/2,Math.min(canvas.width-item.w/2,nx));ny=Math.max(-item.h/2,Math.min(canvas.height-item.h/2,ny));
+    item.x=nx;item.y=ny;item.el.style.left=nx+'px';item.el.style.top=ny+'px';},{passive:false});
+  document.addEventListener('touchend',()=>{if(state.dragState&&state.dragState.itemId)saveHistory();state.dragState=null;});
+
+  function selectItem(id){state.selectedId=id;$$('.placed-item').forEach(e=>e.classList.remove('selected'));const it=state.placedItems.find(i=>i.id===id);if(it)it.el.classList.add('selected');}
+  function deselectAll(){state.selectedId=null;$$('.placed-item').forEach(e=>e.classList.remove('selected'));}
+  placedLayer.addEventListener('mousedown',e=>{if(e.target===placedLayer)deselectAll();});
+
+  function removeItem(id){const idx=state.placedItems.findIndex(i=>i.id===id);if(idx===-1)return;
+    const item=state.placedItems[idx];item.el.classList.add('item-exit');
+    setTimeout(()=>{item.el.remove();state.placedItems.splice(idx,1);updateItemCount();saveHistory();},300);
+    if(state.selectedId===id)state.selectedId=null;}
+
+  document.addEventListener('keydown',e=>{
+    if((e.key==='Delete'||e.key==='Backspace')&&state.selectedId&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();removeItem(state.selectedId);}
+    if((e.ctrlKey||e.metaKey)&&e.key==='z'){e.preventDefault();undo();}
+    if((e.ctrlKey||e.metaKey)&&e.key==='y'){e.preventDefault();redo();}});
+
+  $$('.tool-btn[data-tool]').forEach(btn=>btn.addEventListener('click',()=>{$$('.tool-btn[data-tool]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');state.activeTool=btn.dataset.tool;placedLayer.className='placed-items-layer tool-'+state.activeTool;}));
+
+  placedLayer.addEventListener('wheel',e=>{if(!state.selectedId)return;e.preventDefault();
+    const item=state.placedItems.find(i=>i.id===state.selectedId);if(!item)return;
+    const sf=e.deltaY<0?1.05:0.95;item.w=Math.max(20,Math.min(600,item.w*sf));item.h=Math.max(20,Math.min(600,item.h*sf));
+    item.el.style.width=item.w+'px';item.el.style.height=item.h+'px';saveHistory();},{passive:false});
+
+  // History
+  function saveHistory(){const snap=state.placedItems.map(i=>({id:i.id,catalogId:i.catalogId,x:i.x,y:i.y,w:i.w,h:i.h,rotation:i.rotation}));
+    state.history=state.history.slice(0,state.historyIndex+1);state.history.push(JSON.stringify(snap));state.historyIndex=state.history.length-1;
+    if(state.history.length>50){state.history.shift();state.historyIndex--;}}
+  function restoreHistory(idx){if(idx<0||idx>=state.history.length)return;state.historyIndex=idx;const snap=JSON.parse(state.history[idx]);
+    state.placedItems.forEach(i=>i.el.remove());state.placedItems=[];
+    snap.forEach(d=>{const ci=findCatalogItem(d.catalogId);if(!ci)return;
+      const el=document.createElement('div');el.className='placed-item';el.dataset.placedId=d.id;el.innerHTML=ci.svg;
+      el.style.left=d.x+'px';el.style.top=d.y+'px';el.style.width=d.w+'px';el.style.height=d.h+'px';placedLayer.appendChild(el);
+      const pi={id:d.id,catalogId:d.catalogId,x:d.x,y:d.y,w:d.w,h:d.h,rotation:d.rotation,el};state.placedItems.push(pi);attachItemEvents(el,pi);});
+    state.nextId=snap.reduce((m,i)=>Math.max(m,parseInt(i.id.replace('p-',''),10)),0)+1;updateItemCount();deselectAll();}
+  function undo(){if(state.historyIndex>0)restoreHistory(state.historyIndex-1);}
+  function redo(){if(state.historyIndex<state.history.length-1)restoreHistory(state.historyIndex+1);}
+  $('#btnUndo').addEventListener('click',undo);$('#btnRedo').addEventListener('click',redo);
+
+  // Estimate
+  $('#btnEstimate').addEventListener('click',showEstimate);
+  $('#closeEstimate').addEventListener('click',()=>estimateModal.classList.add('hidden'));
+  estimateModal.addEventListener('click',e=>{if(e.target===estimateModal)estimateModal.classList.add('hidden');});
+
+  function showEstimate(){const counts={};state.placedItems.forEach(pi=>{if(!counts[pi.catalogId]){const c=findCatalogItem(pi.catalogId);counts[pi.catalogId]={name:c.name,price:c.price,qty:0};}counts[pi.catalogId].qty++;});
+    estimateList.innerHTML='';let total=0;
+    if(!Object.keys(counts).length){estimateList.innerHTML='<div class="estimate-empty"><p>No items placed yet!</p><p>Drag some plants, walls, or decor onto your photo to get started.</p></div>';estimateTotal.textContent='$0.00';estimateModal.classList.remove('hidden');return;}
+    Object.values(counts).forEach(item=>{const lt=item.price*item.qty;total+=lt;const row=document.createElement('div');row.className='estimate-row';
+      row.innerHTML=`<span class="est-name">${item.name}</span><span class="est-qty">&times; ${item.qty}</span><span class="est-unit">@ $${item.price.toFixed(2)}</span><span class="est-line-total">$${lt.toFixed(2)}</span>`;estimateList.appendChild(row);});
+    estimateTotal.textContent='$'+total.toFixed(2);estimateModal.classList.remove('hidden');}
+
+  $('#btnPrint').addEventListener('click',()=>window.print());
+  $('#btnSaveDesign').addEventListener('click',()=>{const tc=document.createElement('canvas');tc.width=canvas.width;tc.height=canvas.height;const tctx=tc.getContext('2d');tctx.drawImage(canvas,0,0);
+    const promises=state.placedItems.map(item=>new Promise(resolve=>{const blob=new Blob([item.el.innerHTML],{type:'image/svg+xml'});const url=URL.createObjectURL(blob);const img=new Image();
+      img.onload=()=>{tctx.drawImage(img,item.x,item.y,item.w,item.h);URL.revokeObjectURL(url);resolve()};img.onerror=resolve;img.src=url;}));
+    Promise.all(promises).then(()=>{const a=document.createElement('a');a.download='yardcraft-design.png';a.href=tc.toDataURL('image/png');a.click();});});
+
+  $('#btnNewPhoto').addEventListener('click',()=>{if(state.placedItems.length>0&&!confirm('Start over with a new photo? Your current design will be lost.'))return;
+    state.placedItems.forEach(i=>i.el.remove());state.placedItems=[];state.history=[];state.historyIndex=-1;state.nextId=1;state.selectedId=null;updateItemCount();editor.classList.add('hidden');splash.classList.remove('hidden');});
+
+  function updateItemCount(){itemCount.textContent=state.placedItems.length;}
+  window.addEventListener('resize',()=>{if(!state.photoImg)return;fitCanvas();renderCanvas();});
+})();
+  </script>
 </body>
 </html>

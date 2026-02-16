@@ -745,6 +745,37 @@
   // ── Helpers ────────────────────────────────────────────
   function updateItemCount() {
     itemCount.textContent = state.placedItems.length;
+    // Calculate and update live running price total
+    let total = 0;
+    state.placedItems.forEach(pi => {
+      const ci = findCatalogItem(pi.catalogId);
+      if (ci) total += ci.price;
+    });
+    const lp = $('#livePriceAmount');
+    const lb = $('#estBadge');
+    const lpw = $('#livePrice');
+    if (lp) lp.textContent = '$' + total.toFixed(2);
+    if (lb) lb.textContent = '$' + total.toFixed(0);
+    if (lpw) {
+      if (total > 0) {
+        lpw.classList.add('has-items');
+        lpw.classList.remove('price-bump');
+        void lpw.offsetWidth;
+        lpw.classList.add('price-bump');
+      } else {
+        lpw.classList.remove('has-items');
+      }
+    }
+  }
+
+  // ── Camera Capture ──────────────────────────────────────
+  const cameraInput = $('#cameraInput');
+  const btnCamera = $('#btnCamera');
+  if (btnCamera && cameraInput) {
+    btnCamera.addEventListener('click', () => cameraInput.click());
+    cameraInput.addEventListener('change', (e) => {
+      if (e.target.files[0]) loadPhoto(e.target.files[0]);
+    });
   }
 
   // ── Window resize ──────────────────────────────────────
@@ -752,7 +783,6 @@
     if (!state.photoImg) return;
     fitCanvas();
     renderCanvas();
-    // Reposition items if needed
   });
 
 })();

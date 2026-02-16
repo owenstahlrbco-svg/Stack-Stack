@@ -657,5 +657,293 @@ const ITEMS_CATALOG = {
         <circle cx="35" cy="43" r="3" fill="#E91E63"/><circle cx="35" cy="43" r="1.5" fill="#F48FB1"/>
       </svg>`
     }
+  ],
+  rocks: [
+    {
+      id: 'landscape-boulder',
+      name: 'Landscape Boulder',
+      price: 95,
+      width: 80,
+      height: 55,
+      svg: `<svg viewBox="0 0 80 55" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="40" cy="40" rx="36" ry="14" fill="#616161"/>
+        <ellipse cx="40" cy="30" rx="32" ry="22" fill="#757575"/>
+        <ellipse cx="35" cy="26" rx="24" ry="17" fill="#9E9E9E" opacity="0.6"/>
+        <path d="M20 22 C26 16, 42 14, 56 20" stroke="#BDBDBD" stroke-width="2" fill="none" opacity="0.5"/>
+        <path d="M18 34 C24 28, 36 25, 50 28" stroke="#BDBDBD" stroke-width="1.5" fill="none" opacity="0.3"/>
+      </svg>`
+    },
+    {
+      id: 'river-rocks',
+      name: 'River Rock Cluster',
+      price: 65,
+      width: 100,
+      height: 45,
+      svg: `<svg viewBox="0 0 100 45" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="18" cy="30" rx="14" ry="10" fill="#78909C"/>
+        <ellipse cx="16" cy="28" rx="11" ry="8" fill="#90A4AE" opacity="0.7"/>
+        <ellipse cx="42" cy="28" rx="16" ry="12" fill="#607D8B"/>
+        <ellipse cx="40" cy="26" rx="13" ry="9" fill="#78909C" opacity="0.7"/>
+        <ellipse cx="68" cy="32" rx="13" ry="9" fill="#78909C"/>
+        <ellipse cx="66" cy="30" rx="10" ry="7" fill="#90A4AE" opacity="0.7"/>
+        <ellipse cx="88" cy="28" rx="10" ry="8" fill="#607D8B"/>
+        <ellipse cx="86" cy="26" rx="8" ry="6" fill="#78909C" opacity="0.7"/>
+        <ellipse cx="30" cy="36" rx="8" ry="5" fill="#546E7A"/>
+        <ellipse cx="55" cy="35" rx="9" ry="6" fill="#546E7A"/>
+        <ellipse cx="78" cy="36" rx="7" ry="5" fill="#546E7A"/>
+      </svg>`
+    },
+    {
+      id: 'pea-gravel',
+      name: 'Pea Gravel Bed',
+      price: 50,
+      width: 110,
+      height: 40,
+      svg: `<svg viewBox="0 0 110 40" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="55" cy="20" rx="52" ry="16" fill="#BCAAA4"/>
+        <ellipse cx="55" cy="18" rx="48" ry="13" fill="#D7CCC8"/>
+        <g fill="#A1887F" opacity="0.7">
+          <circle cx="15" cy="18" r="3"/><circle cx="25" cy="14" r="2.5"/><circle cx="35" cy="20" r="3.2"/>
+          <circle cx="45" cy="15" r="2.8"/><circle cx="55" cy="22" r="3"/><circle cx="65" cy="16" r="2.5"/>
+          <circle cx="75" cy="20" r="3.2"/><circle cx="85" cy="14" r="2.8"/><circle cx="95" cy="19" r="2.5"/>
+          <circle cx="20" cy="24" r="2.2"/><circle cx="40" cy="25" r="2.5"/><circle cx="60" cy="12" r="2.2"/>
+          <circle cx="80" cy="24" r="2.8"/><circle cx="50" cy="26" r="2"/><circle cx="70" cy="25" r="2.3"/>
+        </g>
+      </svg>`
+    },
+    {
+      id: 'slate-stack',
+      name: 'Stacked Slate',
+      price: 120,
+      width: 90,
+      height: 50,
+      svg: `<svg viewBox="0 0 90 50" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 45 L15 30 L80 28 L85 45Z" fill="#546E7A"/>
+        <path d="M8 30 L18 18 L78 16 L82 28 L15 30Z" fill="#607D8B"/>
+        <path d="M12 18 L22 8 L75 6 L78 16 L18 18Z" fill="#78909C"/>
+        <path d="M18 8 L28 2 L70 1 L75 6 L22 8Z" fill="#90A4AE"/>
+        <line x1="20" y1="30" x2="75" y2="28" stroke="#455A64" stroke-width="0.5" opacity="0.5"/>
+        <line x1="22" y1="18" x2="74" y2="16" stroke="#455A64" stroke-width="0.5" opacity="0.5"/>
+      </svg>`
+    },
+    {
+      id: 'rock-garden',
+      name: 'Rock Garden Set',
+      price: 180,
+      width: 120,
+      height: 65,
+      svg: `<svg viewBox="0 0 120 65" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="60" cy="55" rx="55" ry="10" fill="#D7CCC8"/>
+        <ellipse cx="30" cy="42" rx="22" ry="15" fill="#757575"/>
+        <ellipse cx="27" cy="38" rx="18" ry="12" fill="#9E9E9E" opacity="0.6"/>
+        <ellipse cx="75" cy="38" rx="18" ry="14" fill="#607D8B"/>
+        <ellipse cx="72" cy="35" rx="14" ry="10" fill="#78909C" opacity="0.6"/>
+        <ellipse cx="100" cy="45" rx="12" ry="10" fill="#78909C"/>
+        <ellipse cx="98" cy="42" rx="9" ry="7" fill="#90A4AE" opacity="0.6"/>
+        <ellipse cx="55" cy="48" rx="10" ry="7" fill="#546E7A"/>
+        <ellipse cx="12" cy="48" rx="9" ry="7" fill="#78909C"/>
+        <g fill="#4CAF50" opacity="0.8">
+          <ellipse cx="48" cy="36" rx="6" ry="4"/>
+          <ellipse cx="90" cy="32" rx="5" ry="3"/>
+          <ellipse cx="15" cy="36" rx="4" ry="3"/>
+        </g>
+      </svg>`
+    },
+    {
+      id: 'lava-rock',
+      name: 'Lava Rock Bed',
+      price: 55,
+      width: 100,
+      height: 40,
+      svg: `<svg viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="50" cy="20" rx="46" ry="16" fill="#4E342E"/>
+        <ellipse cx="50" cy="18" rx="42" ry="13" fill="#5D4037"/>
+        <g fill="#795548" opacity="0.6">
+          <ellipse cx="18" cy="18" rx="8" ry="4"/><ellipse cx="38" cy="14" rx="9" ry="4.5"/>
+          <ellipse cx="58" cy="20" rx="8" ry="4"/><ellipse cx="78" cy="15" rx="7" ry="4"/>
+        </g>
+        <g fill="#3E2723" opacity="0.5">
+          <circle cx="22" cy="22" r="3"/><circle cx="45" cy="22" r="3.5"/>
+          <circle cx="65" cy="14" r="2.5"/><circle cx="80" cy="22" r="3"/>
+        </g>
+      </svg>`
+    },
+    {
+      id: 'field-stone',
+      name: 'Fieldstone (Single)',
+      price: 35,
+      width: 50,
+      height: 40,
+      svg: `<svg viewBox="0 0 50 40" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="25" cy="28" rx="22" ry="10" fill="#616161"/>
+        <ellipse cx="25" cy="22" rx="20" ry="14" fill="#78909C"/>
+        <ellipse cx="22" cy="19" rx="15" ry="11" fill="#90A4AE" opacity="0.5"/>
+        <path d="M12 18 C16 12, 28 10, 36 15" stroke="#B0BEC5" stroke-width="1.5" fill="none" opacity="0.4"/>
+      </svg>`
+    },
+    {
+      id: 'dry-creek',
+      name: 'Dry Creek Bed',
+      price: 140,
+      width: 140,
+      height: 45,
+      svg: `<svg viewBox="0 0 140 45" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 22 C20 15, 35 28, 55 18 C75 8, 90 30, 110 20 C125 12, 135 25, 140 22 L140 35 C130 38, 120 28, 105 32 C85 38, 70 18, 50 30 C35 38, 20 25, 0 32Z" fill="#90A4AE"/>
+        <path d="M5 24 C22 18, 38 30, 56 20 C72 12, 88 28, 108 22 C122 16, 133 26, 138 24" stroke="#64B5F6" stroke-width="2" fill="none" opacity="0.4"/>
+        <g fill="#B0BEC5" stroke="#78909C" stroke-width="0.5">
+          <ellipse cx="15" cy="26" rx="6" ry="4"/><ellipse cx="35" cy="22" rx="5" ry="3.5"/>
+          <ellipse cx="55" cy="24" rx="7" ry="4"/><ellipse cx="75" cy="20" rx="5" ry="3.5"/>
+          <ellipse cx="95" cy="26" rx="6" ry="4"/><ellipse cx="115" cy="22" rx="5" ry="3"/>
+        </g>
+      </svg>`
+    }
+  ],
+  landscape: [
+    {
+      id: 'sod-patch',
+      name: 'Sod / Turf Patch',
+      price: 75,
+      width: 120,
+      height: 50,
+      svg: `<svg viewBox="0 0 120 50" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="8" width="112" height="34" rx="4" fill="#43A047"/>
+        <rect x="6" y="10" width="108" height="30" rx="3" fill="#4CAF50"/>
+        <g stroke="#388E3C" stroke-width="1" opacity="0.5">
+          <line x1="10" y1="18" x2="12" y2="12"/><line x1="20" y1="20" x2="22" y2="14"/>
+          <line x1="30" y1="17" x2="32" y2="11"/><line x1="40" y1="22" x2="42" y2="16"/>
+          <line x1="50" y1="18" x2="52" y2="12"/><line x1="60" y1="20" x2="62" y2="14"/>
+          <line x1="70" y1="17" x2="72" y2="11"/><line x1="80" y1="22" x2="82" y2="16"/>
+          <line x1="90" y1="18" x2="92" y2="12"/><line x1="100" y1="20" x2="102" y2="14"/>
+        </g>
+        <rect x="4" y="34" width="112" height="8" rx="2" fill="#6D4C41"/>
+      </svg>`
+    },
+    {
+      id: 'garden-edging',
+      name: 'Garden Edging (Steel)',
+      price: 45,
+      width: 150,
+      height: 20,
+      svg: `<svg viewBox="0 0 150 20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 10 C20 6, 40 14, 60 8 C80 2, 100 16, 120 10 C135 6, 142 12, 148 10" stroke="#424242" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M2 12 C20 8, 40 16, 60 10 C80 4, 100 18, 120 12 C135 8, 142 14, 148 12" stroke="#616161" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+      </svg>`
+    },
+    {
+      id: 'flower-bed-border',
+      name: 'Flower Bed Border',
+      price: 60,
+      width: 130,
+      height: 35,
+      svg: `<svg viewBox="0 0 130 35" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="18" width="124" height="14" rx="3" fill="#5D4037"/>
+        <rect x="5" y="20" width="120" height="10" rx="2" fill="#6D4C41"/>
+        <g fill="#795548" opacity="0.6">
+          <ellipse cx="20" cy="24" rx="6" ry="2.5"/><ellipse cx="45" cy="23" rx="7" ry="3"/>
+          <ellipse cx="70" cy="25" rx="6" ry="2.5"/><ellipse cx="95" cy="23" rx="7" ry="3"/>
+          <ellipse cx="115" cy="24" rx="5" ry="2.5"/>
+        </g>
+        <rect x="3" y="15" width="124" height="5" rx="2" fill="#A1887F" stroke="#8D6E63" stroke-width="0.5"/>
+      </svg>`
+    },
+    {
+      id: 'retaining-timber',
+      name: 'Landscape Timbers',
+      price: 90,
+      width: 140,
+      height: 30,
+      svg: `<svg viewBox="0 0 140 30" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="136" height="12" rx="2" fill="#6D4C41"/>
+        <rect x="2" y="16" width="136" height="12" rx="2" fill="#5D4037"/>
+        <line x1="4" y1="8" x2="136" y2="8" stroke="#8D6E63" stroke-width="0.5" opacity="0.5"/>
+        <line x1="4" y1="22" x2="136" y2="22" stroke="#795548" stroke-width="0.5" opacity="0.5"/>
+        <g fill="#4E342E" opacity="0.3">
+          <circle cx="10" cy="8" r="3"/><circle cx="130" cy="8" r="3"/>
+          <circle cx="10" cy="22" r="3"/><circle cx="130" cy="22" r="3"/>
+        </g>
+      </svg>`
+    },
+    {
+      id: 'ground-cover',
+      name: 'Ground Cover Plants',
+      price: 30,
+      width: 90,
+      height: 35,
+      svg: `<svg viewBox="0 0 90 35" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="45" cy="25" rx="42" ry="10" fill="#2E7D32"/>
+        <ellipse cx="45" cy="22" rx="38" ry="8" fill="#388E3C"/>
+        <g fill="#4CAF50" opacity="0.7">
+          <ellipse cx="15" cy="20" rx="8" ry="5"/><ellipse cx="30" cy="18" rx="9" ry="6"/>
+          <ellipse cx="48" cy="20" rx="10" ry="5"/><ellipse cx="65" cy="18" rx="8" ry="5"/>
+          <ellipse cx="78" cy="20" rx="7" ry="5"/>
+        </g>
+        <g fill="#66BB6A" opacity="0.5">
+          <ellipse cx="22" cy="16" rx="5" ry="3"/><ellipse cx="40" cy="15" rx="6" ry="3.5"/>
+          <ellipse cx="58" cy="16" rx="5" ry="3"/><ellipse cx="72" cy="15" rx="5" ry="3"/>
+        </g>
+      </svg>`
+    },
+    {
+      id: 'paver-patio',
+      name: 'Paver Patio Section',
+      price: 200,
+      width: 120,
+      height: 80,
+      svg: `<svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="116" height="76" rx="2" fill="#BCAAA4"/>
+        <g fill="#D7CCC8" stroke="#A1887F" stroke-width="0.8">
+          <rect x="4" y="4" width="26" height="17" rx="1"/><rect x="32" y="4" width="26" height="17" rx="1"/>
+          <rect x="60" y="4" width="26" height="17" rx="1"/><rect x="88" y="4" width="26" height="17" rx="1"/>
+          <rect x="4" y="23" width="26" height="17" rx="1"/><rect x="32" y="23" width="26" height="17" rx="1"/>
+          <rect x="60" y="23" width="26" height="17" rx="1"/><rect x="88" y="23" width="26" height="17" rx="1"/>
+          <rect x="4" y="42" width="26" height="17" rx="1"/><rect x="32" y="42" width="26" height="17" rx="1"/>
+          <rect x="60" y="42" width="26" height="17" rx="1"/><rect x="88" y="42" width="26" height="17" rx="1"/>
+          <rect x="4" y="61" width="26" height="15" rx="1"/><rect x="32" y="61" width="26" height="15" rx="1"/>
+          <rect x="60" y="61" width="26" height="15" rx="1"/><rect x="88" y="61" width="26" height="15" rx="1"/>
+        </g>
+      </svg>`
+    },
+    {
+      id: 'raised-bed',
+      name: 'Raised Garden Bed',
+      price: 160,
+      width: 110,
+      height: 55,
+      svg: `<svg viewBox="0 0 110 55" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 50 L5 25 L105 25 L105 50Z" fill="#6D4C41"/>
+        <path d="M5 25 L105 25 L105 30 L5 30Z" fill="#8D6E63"/>
+        <rect x="8" y="30" width="94" height="18" fill="#5D4037"/>
+        <rect x="8" y="15" width="94" height="12" rx="1" fill="#4E342E"/>
+        <g fill="#388E3C">
+          <ellipse cx="25" cy="18" rx="8" ry="6"/><ellipse cx="45" cy="16" rx="9" ry="7"/>
+          <ellipse cx="65" cy="18" rx="8" ry="6"/><ellipse cx="85" cy="16" rx="8" ry="7"/>
+        </g>
+        <g fill="#4CAF50" opacity="0.6">
+          <ellipse cx="35" cy="14" rx="6" ry="5"/><ellipse cx="55" cy="12" rx="7" ry="5"/>
+          <ellipse cx="75" cy="14" rx="6" ry="5"/>
+        </g>
+      </svg>`
+    },
+    {
+      id: 'fire-pit',
+      name: 'Fire Pit Area',
+      price: 350,
+      width: 90,
+      height: 70,
+      svg: `<svg viewBox="0 0 90 70" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="45" cy="50" rx="40" ry="18" fill="#9E9E9E"/>
+        <ellipse cx="45" cy="48" rx="36" ry="15" fill="#BDBDBD"/>
+        <ellipse cx="45" cy="46" rx="30" ry="12" fill="#616161"/>
+        <ellipse cx="45" cy="44" rx="26" ry="10" fill="#424242"/>
+        <path d="M38 40 C36 30, 40 22, 45 18 C44 25, 48 28, 46 35" fill="#FF6D00" opacity="0.8"/>
+        <path d="M45 38 C43 28, 48 20, 52 16 C50 24, 54 28, 50 34" fill="#FF9100" opacity="0.7"/>
+        <path d="M42 42 C41 34, 44 28, 48 24 C46 30, 49 32, 47 38" fill="#FDD835" opacity="0.6"/>
+        <g fill="#90A4AE" stroke="#757575" stroke-width="0.5">
+          <ellipse cx="18" cy="50" rx="7" ry="5"/><ellipse cx="72" cy="50" rx="7" ry="5"/>
+          <ellipse cx="30" cy="58" rx="6" ry="4"/><ellipse cx="60" cy="58" rx="6" ry="4"/>
+          <ellipse cx="45" cy="60" rx="5" ry="3.5"/>
+        </g>
+      </svg>`
+    }
   ]
 };

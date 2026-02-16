@@ -193,6 +193,30 @@ html, body {
   box-shadow: var(--shadow-fun);
 }
 
+.btn-camera {
+  margin-top: 10px;
+  background: none;
+  border: 2px solid var(--pink-400);
+  color: var(--pink-500);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 24px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-camera:hover {
+  background: var(--pink-500);
+  color: white;
+  border-color: var(--pink-500);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(231,76,139,0.25);
+}
+
 /* Background decoration shapes */
 .splash-bg-shapes {
   position: absolute;
@@ -696,6 +720,44 @@ html, body {
   font-family: var(--font-display);
   font-size: 13px;
   color: var(--gray-500);
+}
+
+.live-price {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--green-600);
+  background: var(--green-50);
+  padding: 5px 14px;
+  border-radius: 50px;
+  border: 2px solid var(--green-200);
+  transition: all 0.3s ease;
+}
+.live-price svg { flex-shrink: 0; }
+.live-price .price-amount { min-width: 60px; }
+.live-price.has-items {
+  background: linear-gradient(135deg, var(--green-50), #E8F5E9);
+  border-color: var(--green-400);
+  box-shadow: 0 2px 8px rgba(67,184,122,0.2);
+}
+.live-price.price-bump { animation: priceBump 0.4s ease; }
+@keyframes priceBump {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.btn-estimate .est-badge {
+  background: white;
+  color: var(--orange-500);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 1px 8px;
+  border-radius: 50px;
+  margin-left: 4px;
 }
 
 /* ── Estimate Modal ────────────────────────────────────── */
